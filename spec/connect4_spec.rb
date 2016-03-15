@@ -80,10 +80,4 @@ describe Connect4 do
       expect(game.check_diag2(5,3)).to eq(true)
     end
   end
-
-  #describe Player do
-  #end #Player
-
-  #describe Board do
-  #end #Board
 end #Connect4
