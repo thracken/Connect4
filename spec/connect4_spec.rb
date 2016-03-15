@@ -1,4 +1,4 @@
-require_relative "../connect4.rb"
+require_relative "../connect4"
 
 describe Connect4 do
   before :all do
@@ -55,11 +55,29 @@ describe Connect4 do
     end
     it "returns true for 4-in-a-row vertically" do
       game = Connect4.new
-      game.place_token(4)
-      game.place_token(4)
-      game.place_token(4)
-      game.place_token(4)
+      4.times do
+        game.place_token(0)
+      end
+      expect(game.check_vertical(2,0)).to eq(true)
+    end
+    it "returns true for a diagonal 4-in-a-row (\\)" do
+      game = Connect4.new
+      game.board.board[2][1] = "O"
+      game.board.board[3][2] = "O"
+      game.board.board[4][3] = "O"
+      game.board.board[5][4] = "O"
       expect(game.check_move).to eq(true)
+    end
+  end
+
+  describe "#check_diag2" do #testing individual function because this one doesn't work with the DEBUG point of row 5, col 4
+    it "returns true for a diagonal 4-in-a-row (/)" do
+      game = Connect4.new
+      game.board.board[2][6] = "O"
+      game.board.board[3][5] = "O"
+      game.board.board[4][4] = "O"
+      game.board.board[5][3] = "O"
+      expect(game.check_diag2(5,3)).to eq(true)
     end
   end
 
